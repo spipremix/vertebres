@@ -131,7 +131,6 @@ function public_vertebrer_dist($desc)
 	$cell = vertebrer_cell($field);
 	$sort = vertebrer_sort($field,'');
 	$tros = vertebrer_sort($field,'_');
-	$titre =  "[(#ENV{page}|image_typo{police=dustismo_bold.ttf,taille=36,couleur=4433bb})]";
 	$distant = !$connexion ? '' : "&amp;connect=$connexion";
 	$skel = "./?"._SPIP_PAGE."=table:$surnom$distant&amp;var_mode=debug&amp;var_mode_affiche=squelette#debug_boucle";
 	  
@@ -146,7 +145,7 @@ function public_vertebrer_dist($desc)
 <body class='page_rubrique'><div id='page'>
 <INCLURE{fond=inc-entete}>
 <div id='contenu'>
-<h1 style='text-align:center'>$titre</h1><br />
+<h1 style='text-align:center'>#ENV{page}</h1><br />
 <B1>
 [<p class='pagination'>(#PAGINATION)</p>]
 <table class='spip' border='1' width='90%'>
