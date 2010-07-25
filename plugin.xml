@@ -10,6 +10,8 @@
 	</description>	
 	<etat>stable</etat>
 	<prefix>vertebres</prefix>
+  	<!-- Icone de http://www.fatcow.com/free-icons/ -->
+  	<icon>images/vertebres-32.png</icon>
  	<pipeline>
 		<nom>styliser</nom>
 		<inclure>vertebres_pipelines.php</inclure>
