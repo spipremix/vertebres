@@ -25,7 +25,7 @@ function vertebres_styliser($flux) {
 			$fond = $r[1];
 			$base = _DIR_TMP . 'table_' . $fond . ".$ext";
 			if (!file_exists($base)
-			OR  $GLOBALS['var_mode']) {
+			OR  (defined('_VAR_MODE') AND _VAR_MODE)) {
 				$vertebrer = charger_fonction('vertebrer', 'public');
 				ecrire_fichier($base, $vertebrer($table));
 			}
