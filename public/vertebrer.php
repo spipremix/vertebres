@@ -140,10 +140,10 @@ function public_vertebrer_dist($desc)
 <html xmlns='http://www.w3.org/1999/xhtml' xml:lang='#LANG' lang='#LANG' dir='#LANG_DIR'>
 <head>
 <title>[(#NOM_SITE_SPIP|textebrut)] - #ENV{page}</title>
-<INCLURE{fond=inc-head}>
+<INCLURE{fond=inc-head} />
 </head>
 <body class='page_rubrique'><div id='page'>
-<INCLURE{fond=inc-entete}>
+<INCLURE{fond=inc-entete} />
 <div id='contenu'>
 <h1 style='text-align:center'>#ENV{page}</h1><br />
 <B1>
@@ -167,7 +167,7 @@ function public_vertebrer_dist($desc)
 </table>
 </B1>\n<h2 style='text-align:center'><:texte_vide:></h2>
 <//B1></div>
-<INCLURE{fond=inc-pied}{skel='$skel'}>
+<INCLURE{fond=inc-pied, skel='$skel'} />
 </div>
 </body>
 </html>";
