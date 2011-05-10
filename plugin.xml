@@ -17,4 +17,5 @@
 		<inclure>vertebres_pipelines.php</inclure>
 	</pipeline>
 	<necessite id="SPIP" version="[2.1 dev;]" />
+	<categorie>outil</categorie>
 </plugin>
