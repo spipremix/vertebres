@@ -3,9 +3,8 @@
 	<auteur>Collectif SPIP, [FatCow pour l'icone->http://www.fatcow.com/free-icons/]</auteur>
 	<licence>GNU/GPL</licence>
 	<version>1.0</version>
+	<slogan>Lecteur de tables SQL</slogan>
 	<description>
-	Lecteur de tables SQL.
-	
 	Vertebres propose un moyen de lire une table SQL en indiquant
 	comme argument de page la table &agrave; lire, pr&eacute;c&eacute;d&eacute;
 	de &quot;table:&quot;, par exemple : <code>spip.php?page=table:articles</code>
