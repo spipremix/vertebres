@@ -1,0 +1,19 @@
+<paquet
+	prefix="vertebres"
+	categorie="outil"
+	version="1.0"
+	etat="stable"
+	compatibilite="[2.1 dev;["
+	logo="images/vertebres-32.png"
+>	
+
+	<nom>Vert&egrave;bres</nom>
+	<!-- Lecteur de tables SQL -->
+
+	<auteur>Collectif SPIP</auteur>
+	<credit lien="http://www.fatcow.com/free-icons/">FatCow pour l'icone</credit>
+
+	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GNU/GPL</licence>
+
+	<pipeline nom="styliser" inclure="vertebres_pipelines.php" />
+</paquet>
