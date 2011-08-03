@@ -31,31 +31,12 @@ function vertebrer_sort($fields, $direction)
 {
 	$res = '';
 	foreach($fields as $n => $t) {
-		$tri = $direction
-		. ((sql_test_int($t) OR sql_test_date($r)) ? 'tri_n' : 'tri');
-
-		$url = vertebrer_sanstri($tri)
-		.  "|parametre_url{" . $tri . ",'" . $n . "'}";
-
-		$res .= "\n\t\t<th style='text-align: center'>"
-		. "\n\t\t\t<a href='[(#SELF$url)]'>$n</a>"
-		. "\n\t\t</th>";
+		$res .= "\n\t\t<th scope='col'>[(#TRI{"."$n,$n,ajax})]</th>";
 	}
 	return $res;
 }
 
-// http://doc.spip.org/@vertebrer_sanstri
-function vertebrer_sanstri($sauf='')
-{
-	$url ="";
-	foreach (array('tri', 'tri_n', '_tri', '_tri_n') as $c) {
-		if ($sauf != $c) $url .= "|$c";
-	}
-	return '|parametre_url{"' . substr($url,1) .'",""}';
-}
-
 // Autant de formulaire que de champs (pour les criteres conditionnels) 
-
 // http://doc.spip.org/@vertebrer_form
 function vertebrer_form($fields)
 {
@@ -66,10 +47,15 @@ function vertebrer_form($fields)
 		$s = sql_test_int($t) ? 11
 		  :  (preg_match('/char\s*\((\d)\)/i', $t, $r) ? $r[1] : '');
 
-		$res .= "\n\t\t<td><form action='./' method='get'>"
-		 . "<div style='text-align: center;' >"
+		$res .= "\n\t\t<td>
+			[(#ENV{".$n."}|non)
+			<a href='#' onclick=\"jQuery(this).toggle('fast').siblings('form').toggle('fast');return false;\">[(#CHEMIN_IMAGE{rechercher-20.png}|balise_img)]</a>
+			]
+			<form class='[(#ENV{".$n."}|non)none-js]' action='./' method='get'>"
+		 . "<div>"
 		 . "\n\t\t\t<input name='$n'"
 		 . ($s ? " size='$s'" : '')
+		 . "value=\"[(#ENV{".$n."}|entites_html)]\""
 		 . " />\n\t\t\t[($url|\n\t\t\tform_hidden)]"
 		 . "\n\t\t</div></form></td>";
 	}
@@ -124,52 +110,70 @@ function public_vertebrer_dist($desc)
 	$field = $desc['field'];
 	$key = $desc['key'];
 
-	ksort($field);
+	$defaut_tri = reset(array_keys($field));
+
+	//ksort($field);
 
 	$form = vertebrer_form($field);
 	$crit = vertebrer_crit($field);
 	$cell = vertebrer_cell($field);
 	$sort = vertebrer_sort($field,'');
-	$tros = vertebrer_sort($field,'_');
 	$distant = !$connexion ? '' : "&amp;connect=$connexion";
 	$skel = "./?"._SPIP_PAGE."=table:$surnom$distant&amp;var_mode=debug&amp;var_mode_affiche=squelette#debug_boucle";
-	  
+
 	return
 "#CACHE{0}
-<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Strict//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd'>
-<html xmlns='http://www.w3.org/1999/xhtml' xml:lang='#LANG' lang='#LANG' dir='#LANG_DIR'>
-<head>
-<title>[(#NOM_SITE_SPIP|textebrut)] - #ENV{page}</title>
-<INCLURE{fond=inc-head} />
-</head>
-<body class='page_rubrique'><div id='page'>
-<INCLURE{fond=inc-entete} />
-<div id='contenu'>
-<h1 style='text-align:center'>#ENV{page}</h1><br />
 <B1>
+<h2>[(#GRAND_TOTAL|singulier_ou_pluriel{vertebres:1_donnee,vertebres:nb_donnees})]</h2>
 [<p class='pagination'>(#PAGINATION)</p>]
-<table class='spip' border='1' width='90%'>
-	<tr>
-		<th><:info_numero_abbreviation:></th>$sort
+<div style='overflow: scroll;overflow-y: auto'>
+<table class='spip'>
+	<thead>
+	<tr class='row_first'>
+		<th>
+			<p class='tri'>#TRI{'>',#CHEMIN_IMAGE{tri-asc-16.png}|balise_img{up},ajax}  #TRI{'<',#CHEMIN_IMAGE{tri-desc-16.png}|balise_img{desc},ajax}</p>
+		</th>
+		$sort
 	</tr>
 	<tr>
 		<td></td>$form
 	</tr>
-<BOUCLE1($surnom){pagination} 
-		{par #ENV{tri}}{!par #ENV{_tri}}{par num #ENV{tri_n}}{!par num #ENV{_tri_n}}$crit>
+	</thead>
+	<tbody>
+<BOUCLE1($surnom){pagination}
+		{tri $defaut_tri, direct}$crit>
 	<tr class='[row_(#COMPTEUR_BOUCLE|alterner{'odd','even'})]'>
 		<td style='text-align: right;'>#COMPTEUR_BOUCLE</td>$cell
 	</tr>
 </BOUCLE1>
+	</tbody>
+	<tfoot>
 	<tr>
-		<th><:info_numero_abbreviation:></th>$tros
+		<th>
+			<p class='tri'>#TRI{'>',#CHEMIN_IMAGE{tri-asc-16.png}|balise_img{up},ajax}  #TRI{'<',#CHEMIN_IMAGE{tri-desc-16.png}|balise_img{desc},ajax}</p>
+		</th>
+		$sort
 	</tr>
+	</tfoot>
 </table>
-</B1>\n<h2 style='text-align:center'><:texte_vide:></h2>
-<//B1></div>
-<INCLURE{fond=inc-pied, skel='$skel'} />
+</B1>
+<div style='overflow: scroll;overflow-y: auto'>
+<h2><:texte_vide:></h2>
+<table class='spip'>
+	<thead>
+	<tr class='row_first'>
+		<th>
+			<p class='tri'>#TRI{'>',#CHEMIN_IMAGE{tri-asc-16.png}|balise_img{up},ajax}  #TRI{'<',#CHEMIN_IMAGE{tri-desc-16.png}|balise_img{desc},ajax}</p>
+		</th>
+		$sort
+	</tr>
+	<tr>
+		<td></td>$form
+	</tr>
+	</thead>
+</table>
+<//B1>
 </div>
-</body>
-</html>";
+";
 }
 ?>
