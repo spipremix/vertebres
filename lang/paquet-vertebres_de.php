@@ -8,7 +8,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// V
-	'vertebres_description' => 'Wirbel ermöglichen SQL Tabellen zu lesen, indem einer Seite der Parameter &quot;table:&quot; vorangestellt wird: <code>spip.php?page=table:articles</code>',
+	'vertebres_description' => 'Wirbel ermöglichen SQL Tabellen zu lesen, indem einer Seite der Parameter &quot;table:&quot; vorangestellt wird: <code>spip.php?page=table:articles</code>', # MODIF
 	'vertebres_nom' => 'Wirbel',
 	'vertebres_slogan' => 'SQL Tabellen lesen'
 );
