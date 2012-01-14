@@ -9,8 +9,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// V
 	'vertebres_description' => 'Vertebrae provides a way to read a SQL table indicating
- as an argument of the page the page to read, preceded
-"table", for example: <code>ecrire/?exec=vertebres&table=spip_articles</code>', # MODIF
+ as an argument of the page the database table to read, preceded of
+"table", for example: <code>ecrire/?exec=vertebres&table=spip_articles</code>',
 	'vertebres_nom' => 'Vertebrae',
 	'vertebres_slogan' => 'SQL tables reader'
 );
