@@ -8,10 +8,10 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// 1
-	'1_donnee' => '1 registrácia',
+	'1_donnee' => '1 záznam',
 
 	// N
-	'nb_donnees' => '@nb@ registrácií'
+	'nb_donnees' => '@nb@ záznamov'
 );
 
 ?>
