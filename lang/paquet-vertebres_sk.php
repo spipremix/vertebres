@@ -8,9 +8,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// V
-	'vertebres_description' => 'Vertebres ponúka spôsob na čítanie tabuľky SQL        
-             ako argument zadaním stránky na prečítanie tabľky, pred ktorou je
-	"table:", napríklad: <code>ecrire/?exec=vertebres&table=spip_articles</code>', # MODIF
+	'vertebres_description' => 'Vertebres ponúka spôsob na čítanie tabuľky SQL ako parameter, ktorý požaduje od stránky, aby prečítala tabuľku, pred ktorou je "table:", napríklad: <code>ecrire/?exec=vertebres&table=spip_articles</code>',
 	'vertebres_nom' => 'Vertèbres',
 	'vertebres_slogan' => 'Čítanie tabuliek SQL'
 );
