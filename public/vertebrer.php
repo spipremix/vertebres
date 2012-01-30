@@ -126,7 +126,6 @@ function public_vertebrer_dist($desc)
 	$cell = vertebrer_cell($field);
 	$sort = vertebrer_sort($field,'');
 	$distant = !$connexion ? '' : "&amp;connect=$connexion";
-	$skel = "./?"._SPIP_PAGE."=table:$surnom$distant&amp;var_mode=debug&amp;var_mode_affiche=squelette#debug_boucle";
 
 	return
 "#CACHE{0}
