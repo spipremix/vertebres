@@ -117,7 +117,8 @@ function public_vertebrer_dist($desc)
 	$field = $desc['field'];
 	$key = $desc['key'];
 
-	$defaut_tri = reset(array_keys($field));
+	$defaut_tri = array_keys($field);
+	$defaut_tri = reset($defaut_tri);
 
 	//ksort($field);
 
