@@ -11,10 +11,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'1_donnee' => '1 Objekt gespeichert',
 
 	// N
-	'nb_donnees' => '@nb@ Objekte gespeichert',
-
-	// T
-	'titre_tables' => 'Tabellen der Datenbank'
+	'nb_donnees' => '@nb@ Objeket gespeichert'
 );
 
 ?>

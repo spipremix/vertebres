@@ -11,10 +11,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'1_donnee' => '1 record',
 
 	// N
-	'nb_donnees' => '@nb@ records ',
-
-	// T
-	'titre_tables' => 'Tabellen van de database'
+	'nb_donnees' => '@nb@ records '
 );
 
 ?>
