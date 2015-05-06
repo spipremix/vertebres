@@ -11,7 +11,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'1_donnee' => '1 запись',
 
 	// N
-	'nb_donnees' => 'Записи (@nb@)'
+	'nb_donnees' => 'Записи (@nb@)',
+
+	// T
+	'titre_tables' => 'Таблицы в базе'
 );
 
 ?>
