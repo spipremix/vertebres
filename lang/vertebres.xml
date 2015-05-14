@@ -10,7 +10,8 @@
 		<traducteur nom="George" lien="http://trad.spip.net/auteur/جورج-قندلفت" />
 		<traducteur nom="kent1" lien="http://trad.spip.net/auteur/kent1" />
 	</langue>
-	<langue code="es" url="http://trad.spip.net/tradlang_module/vertebres?lang_cible=es" total="3" traduits="2" relire="0" modifs="0" nouveaux="1" pourcent="66.67">
+	<langue code="es" url="http://trad.spip.net/tradlang_module/vertebres?lang_cible=es" total="3" traduits="3" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
+		<traducteur nom="jaro" lien="http://trad.spip.net/auteur/jaro" />
 		<traducteur nom="jotacese" lien="http://trad.spip.net/auteur/jotacese" />
 	</langue>
 	<langue code="fa" url="http://trad.spip.net/tradlang_module/vertebres?lang_cible=fa" total="3" traduits="2" relire="0" modifs="0" nouveaux="1" pourcent="66.67">
@@ -47,7 +48,7 @@
 		<traducteur nom="olly" lien="http://trad.spip.net/auteur/olly" />
 		<traducteur nom="Serge Markitanenko" lien="http://trad.spip.net/auteur/serge-markitanenko" />
 	</langue>
-	<langue code="sk" url="http://trad.spip.net/tradlang_module/vertebres?lang_cible=sk" total="3" traduits="2" relire="0" modifs="0" nouveaux="1" pourcent="66.67">
+	<langue code="sk" url="http://trad.spip.net/tradlang_module/vertebres?lang_cible=sk" total="3" traduits="3" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="jaro" lien="http://trad.spip.net/auteur/jaro" />
 	</langue>
 	<langue code="uk" url="http://trad.spip.net/tradlang_module/vertebres?lang_cible=uk" total="3" traduits="3" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
