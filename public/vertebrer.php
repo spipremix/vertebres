@@ -10,24 +10,34 @@
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
-//
-// Production dynamique d'un squelette lorsqu'il ne figure pas 
-// dans les dossiers de squelettes mais que son nom est celui d'une table SQL:
-// on produit une table HTML montrant le contenu de la table SQL
-// Le squelette produit illustre quelques possibilites de SPIP:
-// - pagination automatique
-// - tri ascendant et descendant sur chacune des colonnes
-// - critere conditionnel donnant l'extrait correspondant a la colonne en URL
-// 
+/**
+ * Échafaudage du contenu du d'un squelette présantant le contenu d'une table SQL
+ *
+ * Production dynamique d'un squelette lorsqu'il ne figure pas dans les dossiers
+ * de squelettes mais que son nom est celui d'une table SQL:
+ * on produit une table HTML montrant le contenu de la table SQL
+ *
+ * Le squelette produit illustre quelques possibilites de SPIP:
+ * - pagination automatique
+ * - tri ascendant et descendant sur chacune des colonnes
+ * - critere conditionnel donnant l'extrait correspondant a la colonne en URL
+ * 
+ * @package SPIP\Vertebres\Fonctions
+**/
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-// nomme chaque colonne par le nom du champ, 
-// qui sert de lien vers la meme page, avec la table triee selon ce champ
-// distingue champ numerique et non numerique
 
-// http://code.spip.net/@vertebrer_sort
-function vertebrer_sort($fields, $direction)
+/**
+ * Retourne un morceau de squelette pour ajouter les noms des colonnes
+ * et des tris possibles dessus
+ *
+ * @param array $fields
+ *     Liste des champs de la table
+ * @return string
+ *     Ligne de tableau
+**/
+function vertebrer_sort($fields)
 {
 	$res = '';
 	foreach($fields as $n => $t) {
@@ -36,8 +46,16 @@ function vertebrer_sort($fields, $direction)
 	return $res;
 }
 
-// Autant de formulaire que de champs (pour les criteres conditionnels) 
-// http://code.spip.net/@vertebrer_form
+/**
+ * Retourne un morceau de squelette pour ajouter des recherches sur chaque champ de la table
+ *
+ * Autant de formulaire que de champs (pour les criteres conditionnels) 
+ * 
+ * @param array $fields
+ *     Liste des champs de la table
+ * @return string
+ *     Ligne de tableau
+**/
 function vertebrer_form($fields)
 {
 	$res = '';
@@ -66,13 +84,20 @@ function vertebrer_form($fields)
 	return $res;
 }
 
-// Autant de criteres conditionnels que de champs
-
-// http://code.spip.net/@vertebrer_crit
-function vertebrer_crit($v)
+/**
+ * Retourne un morceau de squelette pour ajouter les critères à la boucle
+ *
+ * Autant de criteres conditionnels que de champs
+ * 
+ * @param array $fields
+ *     Liste des champs de la table
+ * @return string
+ *     Critères de boucles
+**/
+function vertebrer_crit($fields)
 {
 	$res = "";
-	foreach($v as $n => $t) {
+	foreach($fields as $n => $t) {
 		if (!in_array($n, array('date', 'date_redac', 'lang', 'recherche','logo')))
 			$res .= "\n\t\t{" . $n .  " ?}";
 	}
@@ -80,13 +105,23 @@ function vertebrer_crit($v)
 }
 
 
-// Class CSS en fonction de la parite du numero de ligne.
-// Style text-align en fonction du type SQL (numerique ou non).
-// Filtre de belle date sur type SQL signalant une date ou une estampille.
-// Si une colonne reference une table, ajoute un href sur sa page dynamique
-// (il faudrait aller chercher sa def pour ilustrer les jointures en SPIP)
-
-// http://code.spip.net/@vertebrer_cell
+/**
+ * Retourne un morceau de squelette pour afficher le contenu de chaque
+ * champ SQL dans une ligne d'un tableau
+ * 
+ * Class CSS en fonction de la parité du numero de ligne.
+ * Style text-align en fonction du type SQL (numerique ou non).
+ * 
+ * Filtre de belle date sur type SQL signalant une date ou une estampillé.
+ *
+ * Si une colonne référence une table, ajoute un href sur sa page dynamique
+ * (il faudrait aller chercher sa def pour ilustrer les jointures en SPIP)
+ * 
+ * @param array $fields
+ *     Liste des champs de la table
+ * @return string
+ *     Ligne de tableau
+**/
 function vertebrer_cell($fields)
 {
 	$res = "";
@@ -96,19 +131,34 @@ function vertebrer_cell($fields)
 			$url = "[(#SELF|parametre_url{page,'" . $r[1] . "'})]";
 			$texte = "<a href='$url'>" . $texte . "</a>";
 		}
-		if (sql_test_int($t))
+		if (sql_test_int($t)) {
 			$s = " style='text-align: right;'";
-		else {
+		} else {
 			$s = '';
-			if (sql_test_date($t))
+			if (sql_test_date($t)) {
 				$texte = "[($texte|affdate_heure)]";
+			}
 		}
 		$res .= "\n\t\t<td$s>$texte</td>";
 	}
 	return $res;
 }
 
-// http://code.spip.net/@public_vertebrer_dist
+/**
+ * Calcule le contenu d'un squelette pour lister le contenu d'une
+ * table SQL à partir de la description de cette table.
+ *
+ * @see base_trouver_table_dist()
+ * @uses vertebrer_form()
+ * @uses vertebrer_crit()
+ * @uses vertebrer_cell()
+ * @uses vertebrer_sort()
+ * 
+ * @param array $desc
+ *     Descrption de la table, telle que retournéer par trouver_table.
+ * @return string
+ *     Contenu du squelette pour la table
+**/
 function public_vertebrer_dist($desc)
 {
 	$nom = $desc['table'];
@@ -125,7 +175,7 @@ function public_vertebrer_dist($desc)
 	$form = vertebrer_form($field);
 	$crit = vertebrer_crit($field);
 	$cell = vertebrer_cell($field);
-	$sort = vertebrer_sort($field,'');
+	$sort = vertebrer_sort($field);
 	$distant = !$connexion ? '' : "&amp;connect=$connexion";
 
 	return
@@ -183,4 +233,3 @@ function public_vertebrer_dist($desc)
 </div>
 ";
 }
-?>
