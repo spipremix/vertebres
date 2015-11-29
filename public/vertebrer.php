@@ -11,7 +11,7 @@
 \***************************************************************************/
 
 /**
- * Échafaudage du contenu du d'un squelette présantant le contenu d'une table SQL
+ * Échafaudage du contenu du d'un squelette présentant le contenu d'une table SQL
  *
  * Production dynamique d'un squelette lorsqu'il ne figure pas dans les dossiers
  * de squelettes mais que son nom est celui d'une table SQL:
