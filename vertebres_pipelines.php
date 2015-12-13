@@ -48,11 +48,11 @@ function vertebres_styliser($flux) {
 	// si pas de squelette trouve,
 	// on verifie si on demande une vue de table
 	if (!$squelette = $flux['data']
-		AND $fond = $flux['args']['fond']
-		AND strncmp($fond, 'prive/vertebres:', 16) == 0
-		AND $table = substr($fond, 16)
-		AND include_spip('inc/autoriser')
-		AND autoriser('webmestre')
+		and $fond = $flux['args']['fond']
+		and strncmp($fond, 'prive/vertebres:', 16) == 0
+		and $table = substr($fond, 16)
+		and include_spip('inc/autoriser')
+		and autoriser('webmestre')
 	) {
 
 		$ext = $flux['args']['ext'];
@@ -64,7 +64,7 @@ function vertebres_styliser($flux) {
 		if ($desc = $trouver_table($table, $connect)) {
 			$fond = $table;
 			$base = _DIR_VERTEBRES . 'table_' . $fond . ".$ext";
-			if (!file_exists($base) OR (defined('_VAR_MODE') AND _VAR_MODE)) {
+			if (!file_exists($base) or (defined('_VAR_MODE') and _VAR_MODE)) {
 				sous_repertoire(_DIR_VERTEBRES);
 				$vertebrer = charger_fonction('vertebrer', 'public');
 				ecrire_fichier($base, $vertebrer($desc));
