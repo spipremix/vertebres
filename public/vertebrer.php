@@ -21,11 +21,13 @@
  * - pagination automatique
  * - tri ascendant et descendant sur chacune des colonnes
  * - critere conditionnel donnant l'extrait correspondant a la colonne en URL
- * 
+ *
  * @package SPIP\Vertebres\Fonctions
-**/
+ **/
 
-if (!defined("_ECRIRE_INC_VERSION")) return;
+if (!defined("_ECRIRE_INC_VERSION")) {
+	return;
+}
 
 
 /**
@@ -36,51 +38,51 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
  *     Liste des champs de la table
  * @return string
  *     Ligne de tableau
-**/
-function vertebrer_sort($fields)
-{
+ **/
+function vertebrer_sort($fields) {
 	$res = '';
-	foreach($fields as $n => $t) {
-		$res .= "\n\t\t<th scope='col'>[(#TRI{"."$n,$n,ajax})]</th>";
+	foreach ($fields as $n => $t) {
+		$res .= "\n\t\t<th scope='col'>[(#TRI{" . "$n,$n,ajax})]</th>";
 	}
+
 	return $res;
 }
 
 /**
  * Retourne un morceau de squelette pour ajouter des recherches sur chaque champ de la table
  *
- * Autant de formulaire que de champs (pour les criteres conditionnels) 
- * 
+ * Autant de formulaire que de champs (pour les criteres conditionnels)
+ *
  * @param array $fields
  *     Liste des champs de la table
  * @return string
  *     Ligne de tableau
-**/
-function vertebrer_form($fields)
-{
+ **/
+function vertebrer_form($fields) {
 	$res = '';
 	$url = join('|', array_keys($fields));
 	$url = "#SELF|\n\t\t\tparametre_url{'$url',''}";
-	foreach($fields as $n => $t) {
+	foreach ($fields as $n => $t) {
 		$s = sql_test_int($t) ? 11
-		  :  (preg_match('/char\s*\((\d)\)/i', $t, $r) ? $r[1] : '');
+			: (preg_match('/char\s*\((\d)\)/i', $t, $r) ? $r[1] : '');
 
-		if (!in_array($n, array('date', 'date_redac', 'lang'))){
+		if (!in_array($n, array('date', 'date_redac', 'lang'))) {
 			$res .= "\n\t\t<td>
-				[(#ENV{".$n."}|non)
+				[(#ENV{" . $n . "}|non)
 				<a href='#' onclick=\"jQuery(this).toggle('fast').siblings('form').toggle('fast');return false;\">[(#CHEMIN_IMAGE{rechercher-20.png}|balise_img)]</a>
 				]
-				<form class='[(#ENV{".$n."}|non)none-js]' action='./' method='get'>"
-			 . "<div>"
-			 . "\n\t\t\t<input name='$n'"
-			 . ($s ? " size='$s'" : '')
-			 . "value=\"[(#ENV{".$n."}|entites_html)]\""
-			 . " />\n\t\t\t[($url|\n\t\t\tform_hidden)]"
-			 . "\n\t\t</div></form></td>";
-		}
-		else
+				<form class='[(#ENV{" . $n . "}|non)none-js]' action='./' method='get'>"
+				. "<div>"
+				. "\n\t\t\t<input name='$n'"
+				. ($s ? " size='$s'" : '')
+				. "value=\"[(#ENV{" . $n . "}|entites_html)]\""
+				. " />\n\t\t\t[($url|\n\t\t\tform_hidden)]"
+				. "\n\t\t</div></form></td>";
+		} else {
 			$res .= "<td></td>";
+		}
 	}
+
 	return $res;
 }
 
@@ -88,19 +90,20 @@ function vertebrer_form($fields)
  * Retourne un morceau de squelette pour ajouter les critères à la boucle
  *
  * Autant de criteres conditionnels que de champs
- * 
+ *
  * @param array $fields
  *     Liste des champs de la table
  * @return string
  *     Critères de boucles
-**/
-function vertebrer_crit($fields)
-{
+ **/
+function vertebrer_crit($fields) {
 	$res = "";
-	foreach($fields as $n => $t) {
-		if (!in_array($n, array('date', 'date_redac', 'lang', 'recherche','logo')))
-			$res .= "\n\t\t{" . $n .  " ?}";
+	foreach ($fields as $n => $t) {
+		if (!in_array($n, array('date', 'date_redac', 'lang', 'recherche', 'logo'))) {
+			$res .= "\n\t\t{" . $n . " ?}";
+		}
 	}
+
 	return $res;
 }
 
@@ -108,26 +111,25 @@ function vertebrer_crit($fields)
 /**
  * Retourne un morceau de squelette pour afficher le contenu de chaque
  * champ SQL dans une ligne d'un tableau
- * 
+ *
  * Class CSS en fonction de la parité du numero de ligne.
  * Style text-align en fonction du type SQL (numerique ou non).
- * 
+ *
  * Filtre de belle date sur type SQL signalant une date ou une estampillé.
  *
  * Si une colonne référence une table, ajoute un href sur sa page dynamique
  * (il faudrait aller chercher sa def pour ilustrer les jointures en SPIP)
- * 
+ *
  * @param array $fields
  *     Liste des champs de la table
  * @return string
  *     Ligne de tableau
-**/
-function vertebrer_cell($fields)
-{
+ **/
+function vertebrer_cell($fields) {
 	$res = "";
-	foreach($fields as $n => $t) {
-		$texte = "#CHAMP_SQL{".$n."}";
-		if (preg_match('/\s+references\s+([\w_]+)/' , $t, $r)) {
+	foreach ($fields as $n => $t) {
+		$texte = "#CHAMP_SQL{" . $n . "}";
+		if (preg_match('/\s+references\s+([\w_]+)/', $t, $r)) {
 			$url = "[(#SELF|parametre_url{page,'" . $r[1] . "'})]";
 			$texte = "<a href='$url'>" . $texte . "</a>";
 		}
@@ -141,6 +143,7 @@ function vertebrer_cell($fields)
 		}
 		$res .= "\n\t\t<td$s>$texte</td>";
 	}
+
 	return $res;
 }
 
@@ -148,19 +151,18 @@ function vertebrer_cell($fields)
  * Calcule le contenu d'un squelette pour lister le contenu d'une
  * table SQL à partir de la description de cette table.
  *
- * @see base_trouver_table_dist()
+ * @see  base_trouver_table_dist()
  * @uses vertebrer_form()
  * @uses vertebrer_crit()
  * @uses vertebrer_cell()
  * @uses vertebrer_sort()
- * 
+ *
  * @param array $desc
  *     Descrption de la table, telle que retournéer par trouver_table.
  * @return string
  *     Contenu du squelette pour la table
-**/
-function public_vertebrer_dist($desc)
-{
+ **/
+function public_vertebrer_dist($desc) {
 	$nom = $desc['table'];
 	$surnom = $desc['id_table'];
 	$connexion = $desc['connexion'];
@@ -179,7 +181,7 @@ function public_vertebrer_dist($desc)
 	$distant = !$connexion ? '' : "&amp;connect=$connexion";
 
 	return
-"#CACHE{0}
+		"#CACHE{0}
 <B1>
 <h2>[(#GRAND_TOTAL|singulier_ou_pluriel{vertebres:1_donnee,vertebres:nb_donnees})]</h2>
 [<p class='pagination'>(#PAGINATION)</p>]

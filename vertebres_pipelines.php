@@ -11,18 +11,21 @@
 \***************************************************************************/
 
 /**
- * Utilisations de pipelines 
+ * Utilisations de pipelines
  *
  * @package SPIP\Vertebres\Pipelines
-**/
+ **/
 
-if (!defined('_ECRIRE_INC_VERSION')) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 if (!defined('_DIR_VERTEBRES')) {
 	/**
 	 * Chemin du répertoire stockant les squelettes calculés des vertèbres
+	 *
 	 * @var string
-	**/
+	 **/
 	define('_DIR_VERTEBRES', _DIR_CACHE . 'vertebres/');
 }
 
@@ -36,7 +39,7 @@ if (!defined('_DIR_VERTEBRES')) {
  * @pipeline styliser
  * @uses base_trouver_table_dist()
  * @uses public_vertebrer_dist()
- * 
+ *
  * @param array $flux Données du pipeline
  * @return array Données du pipeline
  */
@@ -46,11 +49,11 @@ function vertebres_styliser($flux) {
 	// on verifie si on demande une vue de table
 	if (!$squelette = $flux['data']
 		AND $fond = $flux['args']['fond']
-		AND strncmp($fond,'prive/vertebres:',16)==0
-		AND $table = substr($fond,16)
+		AND strncmp($fond, 'prive/vertebres:', 16) == 0
+		AND $table = substr($fond, 16)
 		AND include_spip('inc/autoriser')
-		AND autoriser('webmestre'))
-	{
+		AND autoriser('webmestre')
+	) {
 
 		$ext = $flux['args']['ext'];
 		$connect = $flux['args']['connect'];
@@ -58,7 +61,7 @@ function vertebres_styliser($flux) {
 		// Si pas de squelette regarder si c'est une table
 		// et si l'on a la permission de l'afficher
 		$trouver_table = charger_fonction('trouver_table', 'base');
-		if ($desc= $trouver_table($table, $connect)) {
+		if ($desc = $trouver_table($table, $connect)) {
 			$fond = $table;
 			$base = _DIR_VERTEBRES . 'table_' . $fond . ".$ext";
 			if (!file_exists($base) OR (defined('_VAR_MODE') AND _VAR_MODE)) {
@@ -71,6 +74,6 @@ function vertebres_styliser($flux) {
 			$flux['data'] = _DIR_VERTEBRES . 'table_' . $fond;
 		}
 	}
-	
+
 	return $flux;
 }
