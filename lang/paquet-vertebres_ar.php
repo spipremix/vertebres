@@ -16,4 +16,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'vertebres_slogan' => 'قارئ جداول SQL'
 );
 
-?>

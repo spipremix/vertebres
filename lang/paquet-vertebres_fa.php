@@ -18,4 +18,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'vertebres_slogan' => 'خواندن جدول‌هاي اس.كيو.ال'
 );
 
-?>
