@@ -14,4 +14,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'vertebres_nom' => 'Vertèbres',
 	'vertebres_slogan' => 'Lieser vir SQL-Tafelen'
 );
-

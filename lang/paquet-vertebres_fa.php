@@ -17,4 +17,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'vertebres_nom' => 'فقرات', # براي Vertèbres فقرات را پيشنهاد مي كنم. اگر نظر ديگر هست روي چشم مي‌گذاريم.
 	'vertebres_slogan' => 'خواندن جدول‌هاي اس.كيو.ال'
 );
-

@@ -14,4 +14,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'vertebres_nom' => 'Vértebras',
 	'vertebres_slogan' => 'Lector de tablas SQL'
 );
-
