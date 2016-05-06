@@ -16,4 +16,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'nb_donnees' => '@nb@ Records'
 );
 
-?>

@@ -19,4 +19,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_tables' => 'Tabellen van de database'
 );
 
-?>
