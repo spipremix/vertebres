@@ -1,7 +1,7 @@
 <paquet
 	prefix="vertebres"
 	categorie="outil"
-	version="1.3.0"
+	version="1.3.1"
 	etat="stable"
 	compatibilite="[3.2.0-dev;3.2.*]"
 	logo="images/vertebres-32.png"
@@ -16,4 +16,7 @@
 	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GNU/GPL</licence>
 
 	<pipeline nom="styliser" inclure="vertebres_pipelines.php" />
+
+	<menu nom="vertebres" titre="vertebres:titre_tables" parent="menu_developpement" icone="images/tables-16.png" action="vertebres" />
+
 </paquet>
