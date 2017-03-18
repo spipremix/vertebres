@@ -5,9 +5,9 @@
 	etat="stable"
 	compatibilite="[3.0.0;3.0.*]"
 	logo="images/vertebres-32.png"
->	
+>
 
-	<nom>Vert&#232;bres</nom>
+	<nom>Vertèbres</nom>
 	<!-- Lecteur de tables SQL -->
 
 	<auteur>Collectif SPIP</auteur>
