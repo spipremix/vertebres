@@ -26,7 +26,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 // qui sert de lien vers la meme page, avec la table triee selon ce champ
 // distingue champ numerique et non numerique
 
-// http://code.spip.net/@vertebrer_sort
+// https://code.spip.net/@vertebrer_sort
 function vertebrer_sort($fields, $direction)
 {
 	$res = '';
@@ -37,7 +37,7 @@ function vertebrer_sort($fields, $direction)
 }
 
 // Autant de formulaire que de champs (pour les criteres conditionnels) 
-// http://code.spip.net/@vertebrer_form
+// https://code.spip.net/@vertebrer_form
 function vertebrer_form($fields)
 {
 	$res = '';
@@ -68,7 +68,7 @@ function vertebrer_form($fields)
 
 // Autant de criteres conditionnels que de champs
 
-// http://code.spip.net/@vertebrer_crit
+// https://code.spip.net/@vertebrer_crit
 function vertebrer_crit($v)
 {
 	$res = "";
@@ -86,7 +86,7 @@ function vertebrer_crit($v)
 // Si une colonne reference une table, ajoute un href sur sa page dynamique
 // (il faudrait aller chercher sa def pour ilustrer les jointures en SPIP)
 
-// http://code.spip.net/@vertebrer_cell
+// https://code.spip.net/@vertebrer_cell
 function vertebrer_cell($fields)
 {
 	$res = "";
@@ -108,7 +108,7 @@ function vertebrer_cell($fields)
 	return $res;
 }
 
-// http://code.spip.net/@public_vertebrer_dist
+// https://code.spip.net/@public_vertebrer_dist
 function public_vertebrer_dist($desc)
 {
 	$nom = $desc['table'];
